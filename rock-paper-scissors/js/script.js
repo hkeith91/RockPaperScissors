@@ -2,6 +2,8 @@ let playerScore = 0;
 let compScore = 0;
 let playerChoice;
 let compChoice;
+let playerWin = false;
+let compWin = false;
 
 const playerOptions = {
   r: "ROCK",
@@ -13,44 +15,40 @@ const compOptions = ["r", "p", "s"];
 let playAgain = true;
 
 function displayScores() {
+  console.log("STARTING NEW ROUND!")
   console.log("Player Score: " + playerScore);
   console.log("Computer Score: " + compScore);
 }
 
 function playerChosePaper() {
-  if (compChoice === "SCISSORS") playerLoses();
-  else if (compChoice === "ROCK") playerWins();
-  else draw();
+  if (compChoice === "SCISSORS") compWin = true;
+  else if (compChoice === "ROCK") playerWin = true;
+  else decideMatch();
 }
 
 function playerChoseScissors() {
-  if (compChoice === "ROCK") playerLoses();
+  if (compChoice === "ROCK") compWin = true;
   else if (compChoice === "PAPER") playerWins();
-  else draw();
+  else decideMatch();
 }
 
 function playerChoseRock() {
-  if (compChoice === "PAPER") playerLoses();
-  else if (compChoice === "SCISSORS") playerWins();
-  else draw();
+  if (compChoice === "PAPER") compWin = true;
+  else if (compChoice === "SCISSORS") playerWin = true;
+  else decideMatch();
 }
 
-function playerLoses() {
-  console.log("You LOSE!");
-  compScore++;
-  displayScores();
-  askToPlayAgain();
-}
-
-function playerWins() {
-  console.log("You WIN!");
-  playerScore++;
-  displayScores();
-  askToPlayAgain();
-}
-
-function draw() {
-  console.log("It's a DRAW!");
+function decideMatch() {
+  if(compWin === true){
+    console.log("You LOSE!")
+    compScore++;
+    compWin = false;
+  }
+  else if (playerWin = true){
+    console.log("You WIN!")
+    playerScore++;
+    playerWin = false;
+  }
 }
 
 function askToPlayAgain() {
@@ -83,11 +81,10 @@ function rockPaperScissors() {
       case "SCISSORS":
         playerChoseScissors();
     }
+    displayScores();
     askToPlayAgain();
   }
   console.log("Thanks for playing!");
 }
-
-//ask to play again
 
 rockPaperScissors();
