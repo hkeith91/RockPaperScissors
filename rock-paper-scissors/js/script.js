@@ -67,11 +67,11 @@ function rockPaperScissors() {
 
     playerChoice = prompt("r = ROCK\n p = PAPER\n s = SCISSORS\n"); //todo input validation
     playerChoice = playerOptions[playerChoice];
-    console.log("//DEBUG Player chose: " + playerChoice);
+    console.log("Player chose: " + playerChoice);
 
     compChoice = Math.floor(Math.random() * compOptions.length);
     compChoice = playerOptions[compOptions[compChoice]];
-    console.log("//DEBUG compChoice converted: " + compChoice);
+    console.log("Computer chose: " + compChoice);
 
     switch (playerChoice) {
       case "ROCK":
