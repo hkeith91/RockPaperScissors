@@ -37,6 +37,27 @@ body{
     font-size: 36px;
 }
 
+/* selection-boxes */
+#selection-container{
+    /* placeholder border */
+    border: solid 2px red;  
+    display: flex;
+    justify-content: space-around;
+    min-height: 150px;
+}
+
+.selection{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 236px;
+    height:236px;
+    border: 10px solid navy;
+    border-radius: 10px;
+    background-color: lightblue;
+    margin:75px;
+}
+
 /* rps-boxes */
 #options-container{
     display: flex;
@@ -48,18 +69,17 @@ body{
     display:flex;
     justify-content: center;
     align-items: center;
-    width: 236px;
-    height:236px;
+    width: 175px;
+    height:175px;
     border: 10px solid navy;
     border-radius: 10px;
-    background-color: paleturquoise;
-    margin: 150px 15px;
-    font-size: 48px;
+    background-color: lightblue;
+    margin: 10px 15px 30px;
+    font-size: 34px;
     font-weight: bold;
 }
 
-.scissors,
-.box{
-    font-size: 40px;
-}
+
+
+
 
