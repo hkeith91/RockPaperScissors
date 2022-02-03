@@ -7,19 +7,20 @@ let compWin = false;
 
 const playerSelection = document.querySelector(".player-selection");
 const option = document.querySelectorAll(".option");
-option.forEach(element => {
-  element.addEventListener("mouseover", e =>{
+option.forEach((element) => {
+  element.addEventListener("mouseenter", (e) => {
     playerSelection.innerHTML = element.innerHTML;
-    console.log(element.innerHTML);
+    console.log(e.target);
+  });
+  element.addEventListener("mouseleave", (e) => {
+    playerSelection.innerHTML = "";
+    console.log(e.target);
+  });
+  element.addEventListener("click", (e) => {
+    element.classList.add("selected");
+    console.log("clicked " + e.target);
+  });
 });
-option.forEach(element => {
-  element.addEventListener("click", e =>{
-    console.log("clicked " + element.innerHTML);
-  })
-})
-
-
-})
 
 const playerOptions = {
   r: "ROCK",
@@ -31,7 +32,7 @@ const compOptions = ["r", "p", "s"];
 let playAgain = true;
 
 function displayScores() {
-  console.log("STARTING NEW ROUND!")
+  console.log("STARTING NEW ROUND!");
   console.log("Player Score: " + playerScore);
   console.log("Computer Score: " + compScore);
 }
@@ -55,13 +56,12 @@ function playerChoseRock() {
 }
 
 function decideMatch() {
-  if(compWin === true){
-    console.log("You LOSE!")
+  if (compWin === true) {
+    console.log("You LOSE!");
     compScore++;
     compWin = false;
-  }
-  else if (playerWin = true){
-    console.log("You WIN!")
+  } else if ((playerWin = true)) {
+    console.log("You WIN!");
     playerScore++;
     playerWin = false;
   }
@@ -102,6 +102,5 @@ function rockPaperScissors() {
   }
   console.log("Thanks for playing!");
 }
-
 
 // rockPaperScissors();

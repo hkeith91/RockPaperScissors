@@ -63,12 +63,15 @@ body{
     font-weight: bold;
 }
 
+
+
 /* rps-boxes */
 #options-container{
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
+
 
 .option{
     display:flex;
@@ -85,9 +88,15 @@ body{
 }
 
 .option:hover{
-    /* transform: scale(1.05); */
     border-color: gold;
 }
+
+.selected{
+    border-color: green;
+    border-style: inset;
+    transform: scale(.95);
+}
+
 
 
 
