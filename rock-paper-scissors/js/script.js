@@ -5,6 +5,14 @@ let compChoice;
 let playerWin = false;
 let compWin = false;
 
+const option = document.querySelectorAll(".option")
+option.forEach(element => {
+  element.addEventListener("mouseover", e =>{
+    console.log(e.target)
+});
+
+})
+
 const playerOptions = {
   r: "ROCK",
   p: "PAPER",
@@ -87,4 +95,5 @@ function rockPaperScissors() {
   console.log("Thanks for playing!");
 }
 
-rockPaperScissors();
+
+// rockPaperScissors();

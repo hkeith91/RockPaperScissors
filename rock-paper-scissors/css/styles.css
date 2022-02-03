@@ -40,7 +40,7 @@ body{
 /* selection-boxes */
 #selection-container{
     /* placeholder border */
-    border: solid 2px red;  
+    /* border: solid 2px red;   */
     display: flex;
     justify-content: space-around;
     min-height: 150px;
@@ -65,7 +65,7 @@ body{
     justify-content: center;
 }
 
-.box{
+.option{
     display:flex;
     justify-content: center;
     align-items: center;
