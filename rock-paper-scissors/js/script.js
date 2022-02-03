@@ -5,11 +5,19 @@ let compChoice;
 let playerWin = false;
 let compWin = false;
 
-const option = document.querySelectorAll(".option")
+const playerSelection = document.querySelector(".player-selection");
+const option = document.querySelectorAll(".option");
 option.forEach(element => {
   element.addEventListener("mouseover", e =>{
-    console.log(e.target)
+    playerSelection.innerHTML = element.innerHTML;
+    console.log(element.innerHTML);
 });
+option.forEach(element => {
+  element.addEventListener("click", e =>{
+    console.log("clicked " + element.innerHTML);
+  })
+})
+
 
 })
 

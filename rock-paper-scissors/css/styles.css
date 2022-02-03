@@ -38,7 +38,7 @@ body{
 }
 
 /* selection-boxes */
-#selection-container{
+#selections-container{
     /* placeholder border */
     /* border: solid 2px red;   */
     display: flex;
@@ -58,6 +58,11 @@ body{
     margin:75px;
 }
 
+.player-selection{
+    font-size: 48px;
+    font-weight: bold;
+}
+
 /* rps-boxes */
 #options-container{
     display: flex;
@@ -71,12 +76,17 @@ body{
     align-items: center;
     width: 175px;
     height:175px;
-    border: 10px solid navy;
+    border: 7px outset lightsteelblue;
     border-radius: 10px;
     background-color: lightblue;
     margin: 10px 15px 30px;
     font-size: 34px;
     font-weight: bold;
+}
+
+.option:hover{
+    /* transform: scale(1.05); */
+    border-color: gold;
 }
 
 
