@@ -6,18 +6,25 @@ let playerWin = false;
 let compWin = false;
 
 const playerSelection = document.querySelector(".player-selection");
-const option = document.querySelectorAll(".option");
-option.forEach((element) => {
-  element.addEventListener("mouseenter", (e) => {
-    playerSelection.innerHTML = element.innerHTML;
+const options = document.querySelectorAll(".option");
+let selectionMade = false;
+
+options.forEach((option) => {
+  option.addEventListener("mouseenter", function handleMouseEnter(e) {
+    playerSelection.innerHTML = option.innerHTML;  //show name in selection
+    option.classList.add("hovering")               //highlight hovered box
     console.log(e.target);
   });
-  element.addEventListener("mouseleave", (e) => {
-    playerSelection.innerHTML = "";
+  option.addEventListener("mouseleave", function handleMouseLeave(e) {
+    playerSelection.innerHTML = "";                //empty box if !hovering
+    option.classList.remove("hovering")            
     console.log(e.target);
   });
-  element.addEventListener("click", (e) => {
-    element.classList.add("selected");
+  option.addEventListener("click", (e) => {
+    option.classList.add("selected");
+    option.removeEventListener("click")
+    playerSelection.removeEventListener("mouseleave", handleMouseLeave);
+    playerSelection.removeEventListener("mouseenter", handleMouseEnter);
     console.log("clicked " + e.target);
   });
 });

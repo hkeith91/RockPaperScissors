@@ -87,15 +87,16 @@ body{
     font-weight: bold;
 }
 
-.option:hover{
+.option.hovering{
     border-color: gold;
 }
 
-.selected{
+.option.selected{
     border-color: green;
     border-style: inset;
     transform: scale(.95);
 }
+
 
 
 
