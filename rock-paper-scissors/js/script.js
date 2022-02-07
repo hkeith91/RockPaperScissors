@@ -7,27 +7,33 @@ let compWin = false;
 
 const playerSelection = document.querySelector(".player-selection");
 const options = document.querySelectorAll(".option");
-let selectionMade = false;
+selectionMade = false;
+
+function handleMouseEnter() {
+  this.classList.add("hovering");
+  playerSelection.textContent = this.textContent;
+}
+
+function handleMouseLeave(){
+  this.classList.remove("hovering");
+  playerSelection.textContent = "";
+}
+
+function handleClick(){
+  this.classList.add("selected");
+  options.forEach(option => {
+    option.removeEventListener("mouseenter", handleMouseEnter);
+    option.removeEventListener("mouseleave", handleMouseLeave);
+    option.removeEventListener("click", handleClick);
+  });
+  selectionMade = true;
+}
 
 options.forEach((option) => {
-  option.addEventListener("mouseenter", function handleMouseEnter(e) {
-    playerSelection.innerHTML = option.innerHTML;  //show name in selection
-    option.classList.add("hovering")               //highlight hovered box
-    console.log(e.target);
+    option.addEventListener("mouseenter", handleMouseEnter);
+    option.addEventListener("mouseleave", handleMouseLeave);
+    option.addEventListener("click", handleClick);
   });
-  option.addEventListener("mouseleave", function handleMouseLeave(e) {
-    playerSelection.innerHTML = "";                //empty box if !hovering
-    option.classList.remove("hovering")            
-    console.log(e.target);
-  });
-  option.addEventListener("click", (e) => {
-    option.classList.add("selected");
-    option.removeEventListener("click")
-    playerSelection.removeEventListener("mouseleave", handleMouseLeave);
-    playerSelection.removeEventListener("mouseenter", handleMouseEnter);
-    console.log("clicked " + e.target);
-  });
-});
 
 const playerOptions = {
   r: "ROCK",
@@ -109,5 +115,4 @@ function rockPaperScissors() {
   }
   console.log("Thanks for playing!");
 }
-
-// rockPaperScissors();
+//  rockPaperScissors();

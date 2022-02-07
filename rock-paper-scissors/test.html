@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE" ="edge" />
+    <meta
+      name="viewport"
+      content="width"
+      ="device-width,"
+      initial-scale="1.0"
+    />
+    <title>test</title>
+    <link rel=stylesheet href=css/styles.css>
+    <!-- <script src=js/script.js defer></script> -->
+  </head>
+  <body>
+    <!-- score boxes -->
+    <div id="scores">
+      <div class="score-and-label">
+        <div class="score-container">
+          <div class="player-score score">0</div>
+        </div>
+        <span class="score-label">Player</span>
+      </div>
+      <div class="score-and-label">
+        <div class="score-container">
+          <div class="computer-score score">0</div>
+        </div>
+        <span class="score-label">Computer</span>
+      </div>
+    </div>
+    <!-- selection-boxes -->
+    <div id="selections-container">
+      <div class="player-selection selection"></div>
+      <div class="comp-selection selection"></div>
+    </div>
+    <!-- rps-boxes -->
+    <div id="options-container">
+      <div class="rock option">ROCK</div>
+      <div class="paper option">PAPER</div>
+      <div class="scissors option">SCISSORS</div>
+    </div>
+  </body>
+
+  <script>
+    const playerSelection = document.querySelector(".player-selection");
+    const options = document.querySelectorAll(".option");
+    selectionMade = false;
+
+    function handleMouseEnter() {
+      this.classList.add("hovering");
+      playerSelection.textContent = this.textContent;
+    }
+
+    function handleMouseLeave(){
+      this.classList.remove("hovering");
+      playerSelection.textContent = "";
+    }
+
+    function handleClick(){
+      this.classList.add("selected");
+      options.forEach(option => {
+        option.removeEventListener("mouseenter", handleMouseEnter);
+        option.removeEventListener("mouseleave", handleMouseLeave);
+        option.removeEventListener("click", handleClick);
+      });
+      selectionMade = true;
+    }
+
+    options.forEach((option) => {
+        option.addEventListener("mouseenter", handleMouseEnter);
+        option.addEventListener("mouseleave", handleMouseLeave);
+        option.addEventListener("click", handleClick);
+      });
+  </script>
+</html>
