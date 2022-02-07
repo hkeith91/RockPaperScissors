@@ -58,7 +58,8 @@ body {
   margin: 75px;
 }
 
-.player-selection {
+.player-selection,
+.comp-selection {
   font-size: 48px;
   font-weight: bold;
 }
