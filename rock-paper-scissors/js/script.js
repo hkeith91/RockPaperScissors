@@ -4,6 +4,7 @@ let compChoice;
 let playerWin = false;
 let compWin = false;
 let playerChoice;
+const compOptions = ["ROCK", "PAPER", "SCISSOR"];
 
 const playerSelectionUI = document.querySelector(".player-selection");
 const compSelectionUI = document.querySelector(".comp-selection");
@@ -24,7 +25,6 @@ function handleMouseLeave() {
 function handleClick() {
   this.classList.add("selected");
   playerChoice = playerSelectionUI.textContent;
-  // console.log("player selection: " + playerSelectionUI.textContent);
 
   options.forEach((option) => {
     option.removeEventListener("mouseenter", handleMouseEnter);
@@ -33,13 +33,16 @@ function handleClick() {
   });
 
   compChoice = Math.floor(Math.random() * compOptions.length);
-  compChoice = playerOptions[compOptions[compChoice]];
+  compChoice = compOptions[compChoice];
   compSelectionUI.textContent = compChoice;
-  // console.log("Computer chose: " + compChoice);
   EvaluateMatch(playerChoice, compChoice);
 }
 
 function MakeSelections() {
+  options.forEach((option) => {
+    if (option.classList.contains("selected"))
+      option.classList.remove("selected");
+  });
   options.forEach((option) => {
     option.addEventListener("mouseenter", handleMouseEnter);
     option.addEventListener("mouseleave", handleMouseLeave);
@@ -47,10 +50,9 @@ function MakeSelections() {
   });
 }
 
-function EvaluateMatch(playerMove, compMove){
-  console.log("evaluating match")
-  console.log("player chose:player" + playerMove)
-  console.log("comp chose")
+function EvaluateMatch(playerMove, compMove) {
+  console.log("evaluating match");
+  console.log("comp chose: " + compChoice);
   switch (playerMove) {
     case "ROCK":
       playerChoseRock();
@@ -59,19 +61,7 @@ function EvaluateMatch(playerMove, compMove){
     case "SCISSORS":
       playerChoseScissors();
   }
-};
-
-playerScoreUI.textContent = playerScore;
-compScoreUI.textContent = compScore; 
-MakeSelections();
-
-//old logic
-const playerOptions = {
-  r: "ROCK",
-  p: "PAPER",
-  s: "SCISSORS",
-};
-const compOptions = ["r", "p", "s"];
+}
 
 let playAgain = true;
 
@@ -82,21 +72,29 @@ function displayScores() {
 }
 
 function playerChoseRock() {
-  if (compChoice === "PAPER") compScore++;
-  else if (compChoice === "SCISSORS") playerScore++;
-  else MakeSelections;
+  console.log("player chose:player" + playerChoice);
+  if (compChoice === "PAPER") {
+    compScore++;
+    console.log("comp wins");
+    console.log("Player: " + playerScore + "  Comp: " + compScore);
+  } else if (compChoice === "SCISSORS") {
+    playerScore++;
+    console.log("player wins");
+    console.log("Player: " + playerScore + "  Comp: " + compScore);
+  } else MakeSelections();
+    console.log("Player: " + playerScore + "  Comp: " + compScore);
 }
 
 function playerChosePaper() {
   if (compChoice === "SCISSORS") compScore++;
   else if (compChoice === "ROCK") playerScore++;
-  else MakeSelections;
+  else MakeSelections();
 }
 
 function playerChoseScissors() {
   if (compChoice === "ROCK") compScore++;
   else if (compChoice === "PAPER") playerScore++;
-  else MakeSelections;
+  else MakeSelections();
 }
 
 function decideMatch() {
@@ -111,39 +109,6 @@ function decideMatch() {
   }
 }
 
-function askToPlayAgain() {
-  let answer = prompt("Play again?  y/n: ");
-  if (answer === "n") playAgain = false;
-  else return;
-}
-
-function rockPaperScissors() {
-  displayScores();
-
-  while (playAgain) {
-    console.log(
-      `Your choices are: ${playerOptions["r"]}, ${playerOptions["p"]}, or ${playerOptions["s"]}`
-    );
-
-    playerChoice = prompt("r = ROCK\n p = PAPER\n s = SCISSORS\n"); //todo input validation
-    playerChoice = playerOptions[playerChoice];
-    console.log("Player chose: " + playerChoice);
-
-    compChoice = Math.floor(Math.random() * compOptions.length);
-    compChoice = playerOptions[compOptions[compChoice]];
-    console.log("Computer chose: " + compChoice);
-
-    switch (playerChoice) {
-      case "ROCK":
-        playerChoseRock();
-      case "PAPER":
-        playerChosePaper();
-      case "SCISSORS":
-        playerChoseScissors();
-    }
-    displayScores();
-    askToPlayAgain();
-  }
-  console.log("Thanks for playing!");
-}
-//  rockPaperScissors();
+playerScoreUI.textContent = playerScore;
+compScoreUI.textContent = compScore;
+MakeSelections();
