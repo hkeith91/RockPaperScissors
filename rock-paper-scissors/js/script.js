@@ -1,9 +1,9 @@
 let playerScore = 0;
 let compScore = 0;
-let compChoice;
+let compSelection;
 let playerWin = false;
 let compWin = false;
-let playerChoice;
+let playerSelection;
 const compOptions = ["ROCK", "PAPER", "SCISSOR"];
 
 const playerSelectionUI = document.querySelector(".player-selection");
@@ -24,7 +24,7 @@ function handleMouseLeave() {
 
 function handleClick() {
   this.classList.add("selected");
-  playerChoice = playerSelectionUI.textContent;
+  playerSelection = playerSelectionUI.textContent;
 
   options.forEach((option) => {
     option.removeEventListener("mouseenter", handleMouseEnter);
@@ -32,13 +32,14 @@ function handleClick() {
     option.removeEventListener("click", handleClick);
   });
 
-  compChoice = Math.floor(Math.random() * compOptions.length);
-  compChoice = compOptions[compChoice];
-  compSelectionUI.textContent = compChoice;
-  EvaluateMatch(playerChoice, compChoice);
+  compSelection = Math.floor(Math.random() * compOptions.length);
+  compSelection = compOptions[compSelection];
+  compSelectionUI.textContent = compSelection;
+  EvaluateMatch(playerSelection, compSelection);
 }
 
 function MakeSelections() {
+  console.log("making selections");
   options.forEach((option) => {
     if (option.classList.contains("selected"))
       option.classList.remove("selected");
@@ -52,60 +53,43 @@ function MakeSelections() {
 
 function EvaluateMatch(playerMove, compMove) {
   console.log("evaluating match");
-  console.log("comp chose: " + compChoice);
   switch (playerMove) {
     case "ROCK":
-      playerChoseRock();
+      console.log("Player chose ROCK");
+      if (playerMove === compMove) MakeSelections;
+      else if (compMove === "SCISSORS") {
+        playerScore++;
+        console.log("player score = " + playerScore);
+        MakeSelections;
+      } else if (compMove === "PAPER") {
+        compScore++;
+        console.log("comp score = " + compScore);
+        MakeSelections;
+      }
     case "PAPER":
-      playerChosePaper();
+      console.log("Player chose PAPER");
+      if (playerMove === compMove) MakeSelections;
+      else if (compMove === "ROCK") {
+        playerScore++;
+        console.log("player score = " + playerScore);
+        MakeSelections;
+      } else if (compMove === "SCISSORS") {
+        compScore++;
+        console.log("comp score = " + compScore);
+        MakeSelections;
+      }
     case "SCISSORS":
-      playerChoseScissors();
-  }
-}
-
-let playAgain = true;
-
-function displayScores() {
-  console.log("STARTING NEW ROUND!");
-  console.log("Player Score: " + playerScore);
-  console.log("Computer Score: " + compScore);
-}
-
-function playerChoseRock() {
-  console.log("player chose:player" + playerChoice);
-  if (compChoice === "PAPER") {
-    compScore++;
-    console.log("comp wins");
-    console.log("Player: " + playerScore + "  Comp: " + compScore);
-  } else if (compChoice === "SCISSORS") {
-    playerScore++;
-    console.log("player wins");
-    console.log("Player: " + playerScore + "  Comp: " + compScore);
-  } else MakeSelections();
-    console.log("Player: " + playerScore + "  Comp: " + compScore);
-}
-
-function playerChosePaper() {
-  if (compChoice === "SCISSORS") compScore++;
-  else if (compChoice === "ROCK") playerScore++;
-  else MakeSelections();
-}
-
-function playerChoseScissors() {
-  if (compChoice === "ROCK") compScore++;
-  else if (compChoice === "PAPER") playerScore++;
-  else MakeSelections();
-}
-
-function decideMatch() {
-  if (compWin === true) {
-    console.log("You LOSE!");
-    compScore++;
-    compWin = false;
-  } else if ((playerWin = true)) {
-    console.log("You WIN!");
-    playerScore++;
-    playerWin = false;
+      console.log("Player chose SCISSORS");
+      if (playerMove === compMove) MakeSelections;
+      else if (compMove === "PAPER") {
+        playerScore++;
+        console.log("player score = " + playerScore);
+        MakeSelections;
+      } else if (compMove === "ROCK") {
+        compScore++;
+        console.log("comp score = " + compScore);
+        MakeSelections;
+      }
   }
 }
 
