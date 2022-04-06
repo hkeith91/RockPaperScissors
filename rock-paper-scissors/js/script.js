@@ -69,7 +69,7 @@ function EvaluateMatch(playerMove, compMove) {
       switch (compMove) {
         case "ROCK":
           console.log("before function call")
-          matchDraw;
+          matchDraw();
           console.log("after function call")
           break;
         case "PAPER":
