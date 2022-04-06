@@ -5,6 +5,11 @@ body {
 }
 
 /* scores */
+#prompt{
+  font-size: 36px;
+  align-self: center;
+}
+
 #scores {
   display: flex;
   justify-content: space-around;
@@ -39,8 +44,6 @@ body {
 
 /* selection-boxes */
 #selections-container {
-  /* placeholder border */
-  /* border: solid 2px red;   */
   display: flex;
   justify-content: space-around;
   min-height: 150px;

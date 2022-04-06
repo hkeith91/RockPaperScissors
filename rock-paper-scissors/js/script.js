@@ -11,6 +11,7 @@ const compSelectionUI = document.querySelector(".comp-selection");
 const options = document.querySelectorAll(".option");
 const playerScoreUI = document.querySelector(".player-score");
 const compScoreUI = document.querySelector(".computer-score");
+const prompt = document.querySelector("#prompt");
 
 function handleMouseEnter() {
   this.classList.add("hovering");
@@ -32,14 +33,18 @@ function handleClick() {
     option.removeEventListener("click", handleClick);
   });
 
-  compSelection = Math.floor(Math.random() * compOptions.length);
-  compSelection = compOptions[compSelection];
-  compSelectionUI.textContent = compSelection;
+  //decide computer move
+  // compSelection = Math.floor(Math.random() * compOptions.length);
+  // compSelection = compOptions[compSelection];
+   compSelection = compOptions[0];
+   compSelectionUI.textContent = compSelection;
+
   EvaluateMatch(playerSelection, compSelection);
 }
 
 function MakeSelections() {
   console.log("making selections");
+  prompt.textContent = "Please make your selections!";
   options.forEach((option) => {
     if (option.classList.contains("selected"))
       option.classList.remove("selected");
@@ -51,45 +56,32 @@ function MakeSelections() {
   });
 }
 
+function matchDraw() {
+  console.log("draw!")
+  prompt.textContent = "Draw! \n Press 'ENTER' to play again!";
+}
+
 function EvaluateMatch(playerMove, compMove) {
   console.log("evaluating match");
   switch (playerMove) {
     case "ROCK":
       console.log("Player chose ROCK");
-      if (playerMove === compMove) MakeSelections;
-      else if (compMove === "SCISSORS") {
-        playerScore++;
-        console.log("player score = " + playerScore);
-        MakeSelections;
-      } else if (compMove === "PAPER") {
-        compScore++;
-        console.log("comp score = " + compScore);
-        MakeSelections;
+      switch (compMove) {
+        case "ROCK":
+          console.log("before function call")
+          matchDraw;
+          console.log("after function call")
+          break;
+        case "PAPER":
+          prompt.textContent = "Computer wins! \n Press 'ENTER' to play again!";
+          break;
+        case "SCISSORS":
+          prompt.textContent = "You win! \n Press 'ENTER' to play again!";
+          break;
       }
-    case "PAPER":
-      console.log("Player chose PAPER");
-      if (playerMove === compMove) MakeSelections;
-      else if (compMove === "ROCK") {
-        playerScore++;
-        console.log("player score = " + playerScore);
-        MakeSelections;
-      } else if (compMove === "SCISSORS") {
-        compScore++;
-        console.log("comp score = " + compScore);
-        MakeSelections;
-      }
-    case "SCISSORS":
-      console.log("Player chose SCISSORS");
-      if (playerMove === compMove) MakeSelections;
-      else if (compMove === "PAPER") {
-        playerScore++;
-        console.log("player score = " + playerScore);
-        MakeSelections;
-      } else if (compMove === "ROCK") {
-        compScore++;
-        console.log("comp score = " + compScore);
-        MakeSelections;
-      }
+      break;
+    default:
+      prompt.textContent("RELOAD");
   }
 }
 
