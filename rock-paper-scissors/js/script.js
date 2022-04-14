@@ -4,6 +4,7 @@ let compSelection;
 let playerWin = false;
 let compWin = false;
 let playerSelection;
+let newRound = true;
 const compOptions = ["ROCK", "PAPER", "SCISSOR"];
 
 const playerSelectionUI = document.querySelector(".player-selection");
@@ -33,10 +34,15 @@ function handleClick() {
     option.removeEventListener("click", handleClick);
   });
 
+  function nextRound(){
+    newRound = false;
+    window.addEventListener("keypdown")
+  }
+
   //decide computer move
   // compSelection = Math.floor(Math.random() * compOptions.length);
   // compSelection = compOptions[compSelection];
-   compSelection = compOptions[0];
+   compSelection = compOptions[0]; //entering manually for testing
    compSelectionUI.textContent = compSelection;
 
   EvaluateMatch(playerSelection, compSelection);
@@ -59,6 +65,7 @@ function MakeSelections() {
 function matchDraw() {
   console.log("draw!")
   prompt.textContent = "Draw! \n Press 'ENTER' to play again!";
+  
 }
 
 function EvaluateMatch(playerMove, compMove) {
